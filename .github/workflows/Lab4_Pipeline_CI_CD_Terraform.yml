@@ -73,7 +73,7 @@ jobs:
       # apply a execution plan https://www.terraform.io/cli/commands/apply      
       - name: Terraform Apply
         run: |
-          cd ./tf/artifact
-          terraform apply -auto-approve -lock=false "monplan.tfplan"
+          cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform
+          terraform apply -auto-approve -lock=false "./tf/artifact/monplan.tfplan"
 
 
