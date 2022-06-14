@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ArtifactTerraform
-          path: ./Terraform/Lab4_Pipeline_CI_CD_Terraform/tf.plan
+          path: ./Terraform/Lab4_Pipeline_CI_CD_Terraform/monplan.tfplan
 
   Apply-Terraform:
     runs-on: ubuntu-latest
@@ -56,7 +56,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ArtifactTerraform
-          path: ./Terraform/Lab4_Pipeline_CI_CD_Terraform/tf.plan
+          path: ./tf/artifact
 
       # Install the needed version of Terraform cli
       - name: Setup Terraform
@@ -67,13 +67,13 @@ jobs:
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
         run: |
-          cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform/tf.plan        
+          cd ./tf/artifact          
           terraform init -backend-config="sas_token=${{ secrets.BACKENDSTORAGESASTOKEN }}"
       
       # apply a execution plan https://www.terraform.io/cli/commands/apply      
       - name: Terraform Apply
         run: |
-          cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform/tf.plan
-          terraform apply -auto-approve -lock=false "tf.plan"
+          cd ./tf/artifact
+          terraform apply -auto-approve -lock=false "monplan.tfplan"
 
 
