@@ -74,6 +74,6 @@ jobs:
       - name: Terraform Apply
         run: |
           cd ./tf/artifact
-          terraform apply -auto-approve -lock=false "monplan.tfplan"
+          terraform apply -auto-approve -lock=false "tf.plan"
 
 
