@@ -26,6 +26,7 @@ resource "azurerm_network_interface" "terra_nic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.terra_subnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.terra_pip.id
   }
 }
 
@@ -51,9 +52,16 @@ resource "azurerm_linux_virtual_machine" "terra_vm" {
 
   source_image_reference {
     publisher = "Canonical" # az vm image list --output table
-    offer     = "UbuntuServer" # az vm image list --offer UbuntuServer --all --output table
-    sku       = "18.04-LTS" # az vm image list-skus --location westus --publisher Canonical --offer UbuntuServer --output table
+    offer     = "0001-com-ubuntu-server-focal" # az vm image list --offer UbuntuServer --all --output table
+    sku       = "20_04-lts-gen2" # az vm image list-skus --location westus --publisher Canonical --offer UbuntuServer --output table
     version   = "latest"
   }
 }
 
+resource "azurerm_public_ip" "terra_pip" {
+  name                = "pip-1"
+  resource_group_name = azurerm_resource_group.terra_rg.name
+  location            = azurerm_resource_group.terra_rg.location
+  allocation_method   = "Static"
+
+}
