@@ -48,7 +48,7 @@ jobs:
     needs: 
       - Build-Terraform
     env:
-      TF_ROOT: examples/terraform-project/code
+      TF_ROOT: ./Terraform/Lab4_Pipeline_CI_CD_Terraform
     steps:
       - name: Checks-out du repository
         uses: actions/checkout@v2
