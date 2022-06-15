@@ -6,7 +6,9 @@ metadata:
     labels:
         app: "coolapipke"
 spec:
-    type: LoadBalancer
+    #type: LoadBalancer
+    externalIPs:
+    - 20.103.169.33
     ports:
     - port: 80
       targetPort: 3000
