@@ -1,20 +1,20 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: "coolapi-deployment"
+  name: "coolapipke-deployment"
   namespace: coolapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "coolapi"
+      app: "coolapipke"
   template:
     metadata:
       labels:
-        app: "coolapi"
+        app: "coolapipke"
     spec:
       containers:
-        - name: "coolapi"
-          image: "acrpierrc007.azurecr.io/coolapi:1.0.0"
+        - name: "coolapipke"
+          image: "acrpke.azurecr.io/coolapipke:1.0.0"
           ports:
           - containerPort: 3000

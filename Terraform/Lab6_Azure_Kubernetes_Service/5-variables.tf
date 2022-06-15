@@ -4,13 +4,13 @@ variable "azure_region" {
   # To get names of Azure Region : az account list-locations
   # To check support of Availability Zone in the Azure Region see https://docs.microsoft.com/bs-latn-ba/azure/availability-zones/az-overview
   type    = string
-  default = "westus2"
+  default = "westeurope"
 }
 
 #  Resource Group Name
 variable "resource_group" {
   type    = string
-  default = "RG-AKSCluster"
+  default = "RG-AKSCluster-PKE"
 }
 
 # Virtual Network name
@@ -74,7 +74,7 @@ variable "admin_username" {
 variable "kubernetes_version" {
   description = "Version of Kubernetes to deploy"
   type        = string
-  default     = "1.22.6"
+  default     = "1.23.5"
 }
 
 
@@ -99,7 +99,7 @@ variable "defaultpool-vmsize" {
   # check if the choosen size is available in Azure region you selected : 
   # az vm list-sizes -l westus2 -o table
   type    = string
-  default = "Standard_D2s_v5"
+  default = "Standard_B2s"
 }
 
 variable "defaultpool-ostype" {

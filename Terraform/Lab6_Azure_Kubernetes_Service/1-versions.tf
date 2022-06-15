@@ -8,44 +8,28 @@
 #                                                                                                   |_|                                         
 
 terraform {
-  required_version = ">= 1.1.7"
-  # cf. https://www.terraform.io/language/settings/backends/azurerm
-  backend "azurerm" {
-    resource_group_name  = "RG-AKSCluster"    # mettre ici le nom du resource group de vos ressource
-    storage_account_name = "terraformstan" # mettre le nom du compte de stockage créer dans le lab 1
-    container_name       = "tfstate"
-    key                  = "aks.terraform.tfstate"
-  }
   required_providers {
     azurerm = {
-      # The "hashicorp" namespace is the new home for the HashiCorp-maintained
-      # provider plugins.
-      #
-      # source is not required for the hashicorp/* namespace as a measure of
-      # backward compatibility for commonly-used providers, but recommended for
-      # explicitness.
-      # Configure the Azure Provider
-      # more info : https://github.com/terraform-providers/terraform-provider-azurerm
-      # Check Changelog : https://github.com/terraform-providers/terraform-provider-azurerm/blob/master/CHANGELOG.md
-      source  = "hashicorp/azurerm"
-      version = "= 2.98.0"
+      source = "hashicorp/azurerm"
+      version = "3.10.0"
     }
-
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "= 2.9.0"
+      version = "= 2.11.0"
     }
-
+  }
+  backend "azurerm" {
+    resource_group_name  = "RG-AKSCluster-PKE"         # mettre ici le nom du resource group de vos ressource
+    storage_account_name = "qsdijalufscbqtsapd"      # mettre le nom du compte de stockage créer dans le lab 1
+    container_name       = "tfstate"
+    key                  = "aks.terraform.tfstate" 
   }
 }
 
-# Configure the Azure Provider
 provider "azurerm" {
-  # whilst the `version` attribute is optional, we recommend pinning to a given version of the Provider
+  # Configuration options
   features {}
 }
-
-
 
 # Configure the Kubernetes Provider
 provider "kubernetes" {

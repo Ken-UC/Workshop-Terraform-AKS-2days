@@ -20,6 +20,7 @@ resource "azurerm_kubernetes_cluster" "Terra_aks" {
   kubernetes_version         = var.kubernetes_version
   sku_tier                   = var.sku-controlplane
   private_cluster_enabled    = var.enable-privatecluster
+  role_based_access_control_enabled = true
 
 
   default_node_pool {
@@ -28,7 +29,7 @@ resource "azurerm_kubernetes_cluster" "Terra_aks" {
     vm_size             = var.defaultpool-vmsize
     os_disk_size_gb     = var.defaultpool-osdisksizegb
     max_pods            = var.defaultpool-maxpods
-    availability_zones  = var.defaultpool-availabilityzones
+    zones  = var.defaultpool-availabilityzones
     enable_auto_scaling = var.defaultpool-enableautoscaling
     min_count           = var.defaultpool-mincount
     max_count           = var.defaultpool-maxcount
@@ -48,7 +49,7 @@ resource "azurerm_kubernetes_cluster" "Terra_aks" {
     dns_service_ip     = "10.0.0.10" # Required when network plugin is set to azure, must be in the range of service_cidr and above 1
     docker_bridge_cidr = "172.17.0.1/16"
     service_cidr       = "10.0.0.0/16" # Must not overlap any address from the VNet
-    load_balancer_sku  = "Standard"    # sku can be basic or standard. Here it an AKS cluster with AZ support so Standard SKU is mandatory
+    load_balancer_sku  = "standard"    # sku can be basic or standard. Here it an AKS cluster with AZ support so Standard SKU is mandatory
   }
 
   # addon_profile {
@@ -86,9 +87,9 @@ resource "azurerm_kubernetes_cluster" "Terra_aks" {
   # }
 
   # Enable Kubernetes RBAC 
-  role_based_access_control {
-    enabled = true               # please do NOT set up RBAC to false !!!
-  }
+  # role_based_access_control {
+  #   enabled = true               # please do NOT set up RBAC to false !!!
+  # }
 
   # Managed Identity is mandatory because Kubernetes will provision some Azure Resources like Azure Load Balancer, Public IP, Managed Disks... 
   # You can also use a Service Principal (but it more complicated). One of either identity or service_principal must be specified
