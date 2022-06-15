@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
 
 env: # variables
-  RG_NAME: "RG-AKSCluster"
+  RG_NAME: "RG-AKSCluster-PKE"
   CLUSTER_NAME: "AKS-000" 
-  REGISTRY_NAME: "acrpierrc007"
-  APP_NAME: "coolapi"
+  REGISTRY_NAME: "acrpke"
+  APP_NAME: "coolapipke"
   IMAGE_VERSION: "1.0.0"
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
         if: ${{ failure() }} # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
         uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
         with:
-          assignees: "peterochesne"
+          assignees: "Ken-UC"
           labels: "Kube-score"
           title: "Erreur Kube-Score"
           body: |
