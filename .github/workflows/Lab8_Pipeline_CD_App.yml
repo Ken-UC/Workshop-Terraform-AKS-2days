@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env: # variables
-  RG_NAME: "RG-AKSClusterPKE"
+  RG_NAME: "RG-AKSCluster-PKE"
   CLUSTER_NAME: "AKS-000" 
   REGISTRY_NAME: "acrpke"
   APP_NAME: "coolapipke"
